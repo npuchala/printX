@@ -11,11 +11,11 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Test.");
-        String test = "LU";
-        int row = 5;
+        String text = "LU";
+        int row = 10;
         int numX = -1;//numbers of x's to be printed
-        int labelRow = 1;
+        int labelRow = 5;
         Shape tri = new Diamond();
-        tri.printShape(row, numX, test, labelRow);
+        tri.printShape(row, numX, text, labelRow);
     }
 }
