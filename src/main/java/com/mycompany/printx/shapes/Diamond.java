@@ -6,14 +6,14 @@ package com.mycompany.printx.shapes;
 public class Diamond extends Shape {
 
     private int halfway = -1;
-    private int ogRow;
+    private int ogRow = -1;
 
     @Override
     public void printShape(int row, int numX, String label, int labelRow) {
-        if (row == 0) {
+        if (row <= 0) {
             return;
         }
-        if (numX == -1) {
+        if (ogRow == -1) {
             ogRow = row;
             if (row % 2 == 1) {
                 halfway = (row / 2) + 1;
@@ -48,6 +48,9 @@ public class Diamond extends Shape {
                 System.out.println("");
             }
             numX--;
+//            printShape(row, numX, label, labelRow);
+//
+//            return;
         }
         
         if (halfway >= row) {

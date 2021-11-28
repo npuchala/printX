@@ -5,12 +5,12 @@ package com.mycompany.printx.shapes;
  */
 public class Triangle extends Shape {
 
-    private int ogRow;
+    private int ogRow = -1;
 
     @Override
     public void printShape(int row, int numX, String label, int labelRow) {
         {
-            if (numX == -1) {
+            if (ogRow == -1) {
                 ogRow = row;
                 numX = 1;
             }
