@@ -128,7 +128,31 @@ public class Main {
             }
         }
         return choice;
-    }   
+    }
+    public static boolean repeatProgram(Scanner input){
+//        input.nextLine();
+        String choice ="";
+        int row = 0;
+        while(true)
+        {   
+            try{
+                choice = input.nextLine();
+                
+                if(choice.equalsIgnoreCase("n"))
+                {
+                    return false;
+                }else if(choice.equalsIgnoreCase("y")){
+                    return true;
+                }else{
+                    System.out.println("Do you want to create another shape?(y/n)");
+                }
+            }catch(Exception e){
+                input.next();
+                System.out.println("Please try typing again.");
+            }
+        }
+    }
+    
     public static void drawShape(ShapeChoices choosenShape,int height,String label, int labelRow){
         Shape shape ;
         switch(choosenShape){
@@ -151,30 +175,33 @@ public class Main {
     public static void main(String[] args) {    
         
         Scanner input = new Scanner(System.in);
-
-        //Shape shapeToDraw;
+        boolean repeat = true;
         int height;
         String label;
         int labelRow;
         ShapeChoices choosenShape;        
         ShapeChoices[] shapes = ShapeChoices.values();
+        while(repeat){
+            System.out.println("What shape do you want to draw?\n");
+            for (ShapeChoices shape : shapes) {
+                System.out.println(shape);
+            }
+            choosenShape = chooseShape(input);
+         
+            System.out.println("What height do you want the "+ choosenShape +" to be?");
+            height = chooseHeight(input);
+            
+            System.out.println("What do you want written on the "+ choosenShape +"?");
+            label = chooseLabel(input);
+            
+            System.out.println("On what row do you want "+ label +" to be written?");
+            labelRow = chooseLabelRow(input, height);
+            
+            drawShape(choosenShape,height, label, labelRow);
 
-        System.out.println("What shape do you want to draw?\n");
-        for (ShapeChoices shape : shapes) {
-            System.out.println(shape);
+            System.out.println("Do you want to create another shape?(y/n)");
+            repeat = repeatProgram(input);
+            
         }
-        choosenShape = chooseShape(input);
-        
-        System.out.println("What height do you want the "+ choosenShape +" to be?");
-        height = chooseHeight(input);
-        
-        System.out.println("What do you want written on the "+ choosenShape +"?");
-        label = chooseLabel(input);
-        
-        System.out.println("On what row do you want "+ label +" to be written?");
-        labelRow = chooseLabelRow(input, height);
-        
-        drawShape(choosenShape,height, label, labelRow);
-        
     }
 }
