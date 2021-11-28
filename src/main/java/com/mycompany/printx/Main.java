@@ -80,33 +80,101 @@ public class Main {
         }
         return choice;
     }
-    public static int chooseLabelRow(Scanner input){
-        return 0;
+    public static int chooseLabelRow(Scanner input, int height){
+        String choice ="";
+        int row = 0;
+        while(row <= 0)
+        {   
+
+            try{
+                choice = input.nextLine();
+                System.out.println(choice);
+                if(choice.length() == 0)
+                {
+                    return 4;
+                }else{
+                    row = Integer.parseInt(choice);
+                }
+                if(row <= 0){
+                    System.out.println("Please enter a positive integer.");
+                }else{
+                    return row;
+                }
+            }catch(Exception e){
+                System.out.println("Please enter a positive integer.");
+            }
+        }
+        return row;
     }
-    public static void main(String[] args) {
-        test();
-        return;
+    
+    public static String chooseLabel(Scanner input){
+        input.nextLine();
+        String choice ="";
+        int row = 0;
+        while(choice.length() <= 0)
+        {   
+            try{
+                choice = input.nextLine();
+                
+                if(choice.length() == 0)
+                {
+                    return "LU";
+                }else{
+                    return choice;
+                }
+            }catch(Exception e){
+                input.next();
+                System.out.println("Please try typing again.");
+            }
+        }
+        return choice;
+    }   
+    public static void drawShape(ShapeChoices choosenShape,int height,String label, int labelRow){
+        Shape shape ;
+        switch(choosenShape){
+            case Triangle:
+                shape = new Triangle();
+                break;
+            case Square:
+                shape = new Square();
+                break;
+            case Diamond:
+                shape = new Diamond();
+                break;
+            default:
+                shape = new Triangle();
+                break;
+        }
+        shape.printShape(height, height, label, labelRow);
+    }
+    
+    public static void main(String[] args) {    
         
+        Scanner input = new Scanner(System.in);
+
+        //Shape shapeToDraw;
+        int height;
+        String label;
+        int labelRow;
+        ShapeChoices choosenShape;        
+        ShapeChoices[] shapes = ShapeChoices.values();
+
+        System.out.println("What shape do you want to draw?\n");
+        for (ShapeChoices shape : shapes) {
+            System.out.println(shape);
+        }
+        choosenShape = chooseShape(input);
         
-//        Scanner input = new Scanner(System.in);
-//
-//        Shape shapeToDraw;
-//        int height;
-//        String label = "LU";
-//        int labelRow = 4;
-//        ShapeChoices choosenShape;
-//
-//        
-//        ShapeChoices[] shapes = ShapeChoices.values();
-//        System.out.println("What shape do you want to draw?\n");
-//        for (ShapeChoices shape : shapes) {
-//            System.out.println(shape);
-//        }
-//        choosenShape = chooseShape(input);
-//        System.out.println("What height do you want the "+ choosenShape +" to be?");
-//        height = chooseHeight(input);
-//      labelRow = chooseLabelRow(input);
-
-
+        System.out.println("What height do you want the "+ choosenShape +" to be?");
+        height = chooseHeight(input);
+        
+        System.out.println("What do you want written on the "+ choosenShape +"?");
+        label = chooseLabel(input);
+        
+        System.out.println("On what row do you want "+ label +" to be written?");
+        labelRow = chooseLabelRow(input, height);
+        
+        drawShape(choosenShape,height, label, labelRow);
+        
     }
 }
